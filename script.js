@@ -1,35 +1,25 @@
-let firstNumber = "0";
+let firstNumber = undefined;
+let secondNumber = undefined;
+let operator = () => "none";
+//let isFirst = true;
+//let isSecond = false;
 
 const screen = document.querySelector(".screen");
-screen.textContent = firstNumber;
+screen.textContent = 0;
 
 const reset = document.querySelector(".ac");
 reset.addEventListener("click", () => {
-  firstNumber = "0";
   screen.textContent = "0";
+  firstNumber = undefined;
+  secondNumber = undefined;
+  operator = () => "none";
 });
 
 const back = document.querySelector(".back");
-back.addEventListener("click", () => {
-  screen.textContent = "";
-});
+back.addEventListener("click", () => {});
 
 const percent = document.querySelector(".percent");
-percent.addEventListener("click", () => {
-  screen.textContent = "%";
-});
-
-const divide = document.querySelector(".divide");
-divide.addEventListener("click", () => {});
-
-const multiply = document.querySelector(".multiply");
-multiply.addEventListener("click", () => {});
-
-const subtract = document.querySelector(".subtract");
-subtract.addEventListener("click", () => {});
-
-const add = document.querySelector(".add");
-add.addEventListener("click", () => {});
+percent.addEventListener("click", () => {});
 
 const zero = document.querySelector(".zero");
 zero.addEventListener("click", () => {
@@ -88,13 +78,64 @@ const dot = document.querySelector(".dot");
 dot.addEventListener("click", () => {});
 
 const equal = document.querySelector(".equal");
-equal.addEventListener("click", () => {});
+equal.addEventListener("click", () => {
+  countResult();
+});
+
+const divide = document.querySelector(".divide");
+divide.addEventListener("click", () => {
+  operator = divideFn;
+  firstNumber = Number(screen.textContent);
+  secondNumber = undefined;
+});
+
+const multiply = document.querySelector(".multiply");
+multiply.addEventListener("click", () => {
+  operator = multiplyFn;
+  firstNumber = Number(screen.textContent);
+  secondNumber = undefined;
+});
+
+const subtract = document.querySelector(".subtract");
+subtract.addEventListener("click", () => {
+  operator = subtractFn;
+  firstNumber = Number(screen.textContent);
+  secondNumber = undefined;
+});
+
+const add = document.querySelector(".add");
+add.addEventListener("click", () => {
+  operator = addFn;
+  firstNumber = Number(screen.textContent);
+  secondNumber = undefined;
+});
 
 function createNumber(num) {
-  if (firstNumber == 0) {
-    firstNumber = num;
+  if (firstNumber == undefined) {
+    if (screen.textContent == "0") {
+      screen.textContent = num;
+    } else {
+      screen.textContent += num;
+    }
   } else {
-    firstNumber += num;
+    if (secondNumber == undefined) {
+      screen.textContent = num;
+      secondNumber = Number(screen.textContent);
+    } else {
+      screen.textContent += num;
+    }
   }
-  screen.textContent = firstNumber;
 }
+
+function countResult() {
+  if (operator() != "none") {
+    secondNumber = Number(screen.textContent);
+    screen.textContent = operator(firstNumber, secondNumber);
+    operator = () => "none";
+  }
+}
+
+const addFn = (a, b) => a + b;
+const subtractFn = (a, b) => a - b;
+const multiplyFn = (a, b) => a * b;
+const divideFn = (a, b) => a / b;
