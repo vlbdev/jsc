@@ -72,7 +72,17 @@ nine.addEventListener("click", () => {
 });
 
 const plusMinus = document.querySelector(".plusMinus");
-plusMinus.addEventListener("click", () => {});
+plusMinus.addEventListener("click", () => {
+  let str = screen.textContent;
+  console.log(str);
+
+  if (str == "0") return;
+  if (str[0] == "-") {
+    screen.textContent = str.slice(1);
+  } else {
+    screen.textContent = "-" + str;
+  }
+});
 
 const dot = document.querySelector(".dot");
 dot.addEventListener("click", () => {});
@@ -111,7 +121,8 @@ add.addEventListener("click", () => {
 });
 
 function createNumber(num) {
-  if (firstNumber == undefined) {
+  if (operator() == "none") {
+    //if (firstNumber == undefined) {
     if (screen.textContent == "0") {
       screen.textContent = num;
     } else {
