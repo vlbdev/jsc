@@ -16,7 +16,16 @@ reset.addEventListener("click", () => {
 });
 
 const back = document.querySelector(".back");
-back.addEventListener("click", () => {});
+back.addEventListener("click", () => {
+  if (screen.textContent.length > 1) {
+    screen.textContent = screen.textContent.slice(0, -1);
+  } else {
+    if (screen.textContent != "0") {
+      screen.textContent = "0";
+      secondNumber = undefined;
+    }
+  }
+});
 
 const percent = document.querySelector(".percent");
 percent.addEventListener("click", () => {});
