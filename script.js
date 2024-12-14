@@ -17,7 +17,9 @@ reset.addEventListener("click", () => {
 
 const back = document.querySelector(".back");
 back.addEventListener("click", () => {
-  if (screen.textContent.length > 1) {
+  if (screen.textContent.length == 2 && screen.textContent[0] == "-") {
+    screen.textContent = "0";
+  } else if (screen.textContent.length >= 2) {
     screen.textContent = screen.textContent.slice(0, -1);
   } else {
     if (screen.textContent != "0") {
