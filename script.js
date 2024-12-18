@@ -96,7 +96,9 @@ plusMinus.addEventListener("click", () => {
 });
 
 const dot = document.querySelector(".dot");
-dot.addEventListener("click", () => {});
+dot.addEventListener("click", () => {
+  if (!screen.textContent.includes(".")) screen.textContent += ".";
+});
 
 const equal = document.querySelector(".equal");
 equal.addEventListener("click", () => {
