@@ -30,7 +30,9 @@ back.addEventListener("click", () => {
 });
 
 const percent = document.querySelector(".percent");
-percent.addEventListener("click", () => {});
+percent.addEventListener("click", () => {
+  screen.textContent = Number(screen.textContent) / 100;
+});
 
 const zero = document.querySelector(".zero");
 zero.addEventListener("click", () => {
@@ -85,7 +87,6 @@ nine.addEventListener("click", () => {
 const plusMinus = document.querySelector(".plusMinus");
 plusMinus.addEventListener("click", () => {
   let str = screen.textContent;
-  console.log(str);
 
   if (str == "0") return;
   if (str[0] == "-") {
@@ -154,7 +155,9 @@ function createNumber(num) {
 function countResult() {
   if (operator() != "none") {
     secondNumber = Number(screen.textContent);
-    screen.textContent = operator(firstNumber, secondNumber);
+    screen.textContent = Number(
+      operator(firstNumber, secondNumber).toFixed(16)
+    );
     operator = () => "none";
   }
 }
